@@ -1,0 +1,280 @@
+import React, { useState } from "react";
+import {
+  Row,
+  Col,
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  Table,
+  Input,
+} from "reactstrap";
+import DashCard from "../../dashboardCards/DashCard";
+import Image from "next/image";
+import Bitcoin from "../../../assets/images/crypto/bitcoin-btc-logo.svg";
+import Cardano from "../../../assets/images/crypto/cardano-ada-logo.svg";
+import Litecoin from "../../../assets/images/crypto/litecoin-ltc-logo.svg";
+import Monero from "../../../assets/images/crypto/monero-xmr-logo.svg";
+import Shiba from "../../../assets/images/crypto/shiba-inu-shib-logo.svg";
+import Terra from "../../../assets/images/crypto/terra-luna-luna-logo.svg";
+import Tether from "../../../assets/images/crypto/tether-usdt-logo.svg";
+
+const CryptoTrade = () => {
+  const [activeTab, setActiveTab] = useState("1");
+
+  const toggle = (tab) => {
+    if (activeTab !== tab) {
+      setActiveTab(tab);
+    }
+  };
+  return (
+    /*--------------------------------------------------------------------------------*/
+    /* Used In Dashboard-2 [Cryptocurrency]                                           */
+    /*--------------------------------------------------------------------------------*/
+    <DashCard
+      title="Trade History"
+      subtitle="History as you Like"
+      actions={
+        <Input type="select" className="custom-select">
+          <option value="0">March</option>
+          <option value="1">April</option>
+          <option value="2">May</option>
+        </Input>
+      }
+    >
+      <Nav pills className="custom-pills mt-4">
+        <NavItem>
+          <NavLink
+            className={
+              activeTab === "1" ? "active text-dark-white" : "cursor-pointer"
+            }
+            onClick={() => {
+              toggle("1");
+            }}
+          >
+            Market
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink
+            className={
+              activeTab === "2" ? "active text-dark-white" : "cursor-pointer"
+            }
+            onClick={() => {
+              toggle("2");
+            }}
+          >
+            Sell History
+          </NavLink>
+        </NavItem>
+      </Nav>
+      <TabContent activeTab={activeTab} className="mt-3">
+        {/*--------------------------------------------------------------------------------*/}
+        {/* Tab-1                                                                          */}
+        {/*--------------------------------------------------------------------------------*/}
+        <TabPane tabId="1">
+          <Row>
+            <Col sm="12">
+              <div>
+                <Table className="v-middle no-wrap">
+                  <thead>
+                    <tr>
+                      <th>Price</th>
+                      <th>Amount</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <span className="text-success">$12948.89</span>
+                      </td>
+                      <td>
+                        <Image
+                          src={Bitcoin}
+                          height="30"
+                          alt="bitcoin"
+                          width="30"
+                        />{" "}
+                        <span className="ms-2 fw-bold">0.123</span>
+                      </td>
+                      <td>12:45:09</td>
+                    </tr>
+                    <tr className="">
+                      <td>
+                        <span className="text-danger">$23135.78</span>
+                      </td>
+                      <td>
+                        <Image src={Cardano} height="30" alt="as" width="30" />{" "}
+                        <span className="ms-2 fw-bold">1.123</span>
+                      </td>
+                      <td>12:43:09</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span className="text-success">$43567.98</span>
+                      </td>
+                      <td>
+                        <Image
+                          src={Tether}
+                          alt="tether"
+                          height="30"
+                          width="30"
+                        />
+                        <span className="ms-2 fw-bold">0.123</span>
+                      </td>
+                      <td>12:45:09</td>
+                    </tr>
+                    <tr className="">
+                      <td>
+                        <span className="text-success">$12948.89</span>
+                      </td>
+                      <td>
+                        <Image
+                          src={Litecoin}
+                          height="30"
+                          alt="litecoin"
+                          width="30"
+                        />{" "}
+                        <span className="ms-2 fw-bold">0.123</span>
+                      </td>
+                      <td>12:45:09</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span className="text-danger">$23135.78</span>
+                      </td>
+                      <td>
+                        <Image
+                          src={Monero}
+                          height="30"
+                          alt="monero"
+                          width="30"
+                        />{" "}
+                        <span className="ms-2 fw-bold">1.123</span>
+                      </td>
+                      <td>12:43:09</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span className="text-success">$43567.98</span>
+                      </td>
+                      <td>
+                        <Image src={Shiba} height="30" alt="shiba" width="30" />
+                        <span className="ms-2 fw-bold">0.123</span>
+                      </td>
+                      <td>12:45:09</td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </div>
+            </Col>
+          </Row>
+        </TabPane>
+        {/*--------------------------------------------------------------------------------*/}
+        {/* Tab-2                                                                          */}
+        {/*--------------------------------------------------------------------------------*/}
+        <TabPane tabId="2">
+          <Row>
+            <Col sm="12">
+              <Table className="v-middle no-wrap" responsive>
+                <thead>
+                  <tr>
+                    <th className="border-top-0">Price</th>
+                    <th className="border-top-0">Amount</th>
+                    <th className="border-top-0">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <span className="text-success">$43567.98</span>
+                    </td>
+                    <td>
+                      <Image src={Terra} height="30" alt="terra" width="30" />{" "}
+                      <span className="ms-2 fw-bold">0.123</span>
+                    </td>
+                    <td>12:45:09</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span className="text-success">$12948.89</span>
+                    </td>
+                    <td>
+                      <Image src={Tether} alt="tether" height="30" width="30" />{" "}
+                      <span className="ms-2 fw-bold">0.123</span>
+                    </td>
+                    <td>12:45:09</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span className="text-success">$12948.89</span>
+                    </td>
+                    <td>
+                      <Image
+                        src={Bitcoin}
+                        height="30"
+                        alt="bitcoin"
+                        width="30"
+                      />{" "}
+                      <span className="ms-2 fw-bold">0.123</span>
+                    </td>
+                    <td>12:45:09</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span className="text-danger">$23135.78</span>
+                    </td>
+                    <td>
+                      <Image
+                        src={Bitcoin}
+                        height="30"
+                        alt="bitcoin"
+                        width="30"
+                      />{" "}
+                      <span className="ms-2 fw-bold">1.123</span>
+                    </td>
+                    <td>12:43:09</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span className="text-danger">$23135.78</span>
+                    </td>
+                    <td>
+                      <Image
+                        src={Bitcoin}
+                        height="30"
+                        alt="bitcoin"
+                        width="30"
+                      />{" "}
+                      <span className="ms-2 fw-bold">1.123</span>
+                    </td>
+                    <td>12:43:09</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span className="text-success">$43567.98</span>
+                    </td>
+                    <td>
+                      <Image
+                        src={Bitcoin}
+                        height="30"
+                        alt="bitcoin"
+                        width="30"
+                      />{" "}
+                      <span className="ms-2 fw-bold">0.123</span>
+                    </td>
+                    <td>12:45:09</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </Col>
+          </Row>
+        </TabPane>
+      </TabContent>
+    </DashCard>
+  );
+};
+
+export default CryptoTrade;
