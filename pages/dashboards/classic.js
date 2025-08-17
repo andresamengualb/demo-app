@@ -12,16 +12,16 @@ const Classic = () => {
     <>
       {/*********************Sales Overview ************************/}
       <Row>
-        <Col lg="12">
+        <Col lg="10">
           <SalesOverview />
         </Col>
       </Row>
       {/*********************Email & Visitor ************************/}
       <Row>
-        <Col lg="8" sm="12">
+        <Col lg="10" sm="12">
           <EmailCampaign />
         </Col>
-        <Col lg="4" sm="12">
+        <Col lg="10" sm="12">
           <ActiveVisitors />
         </Col>
       </Row>
@@ -29,16 +29,16 @@ const Classic = () => {
       <Stats />
       {/*********************Project Table ************************/}
       <Row>
-        <Col lg="12">
+        <Col lg="10">
           <ProjectTable />
         </Col>
       </Row>
       {/*********************Chat & comment ************************/}
       <Row>
-        <Col lg="6" sm="12">
+        <Col lg="10" sm="12">
           <RecentComments />
         </Col>
-        <Col lg="6" sm="12">
+        <Col lg="10" sm="12">
           <Chat />
         </Col>
       </Row>

@@ -46,7 +46,7 @@ const LoginFormik = () => {
         <Row className="justify-content-center align-items-center h-100">
           <Col lg="12" className="loginContainer">
             <AuthLogo />
-            <Card>
+            <Card className="bg-white">
               <CardBody className="p-4 m-1">
                 <h4 className="mb-0 fw-bold">Iniciar sesión</h4>
                 <Formik
