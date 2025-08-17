@@ -11,20 +11,18 @@ const Logo = () => {
   const isDarkMode = useSelector((state) => state.customizer.isDark);
   const activetopbarBg = useSelector((state) => state.customizer.topbarBg);
   return (
-    <Link href="/">
-      <a className="d-flex align-items-center gap-2">
-        {isDarkMode || activetopbarBg !== "white" ? (
-          <>
-            <Image src={LogoWhiteIcon} alt="logo" />
-            <Image src={LogoWhiteText} alt="logo" />
-          </>
-        ) : (
-          <>
-            <Image src={LogoDarkIcon} alt="logo" />
-            <Image src={LogoDarkText} alt="logo" />
-          </>
-        )}
-      </a>
+    <Link href="/" className="d-flex align-items-center gap-2">
+      {isDarkMode || activetopbarBg !== "white" ? (
+        <>
+          <Image src={LogoWhiteIcon} alt="logo" />
+          <Image src={LogoWhiteText} alt="logo" />
+        </>
+      ) : (
+        <>
+          <Image src={LogoDarkIcon} alt="logo" />
+          <Image src={LogoDarkText} alt="logo" />
+        </>
+      )}
     </Link>
   );
 };

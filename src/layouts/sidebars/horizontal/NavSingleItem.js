@@ -13,20 +13,18 @@ const NavSingleItem = ({
 }) => {
   return (
     <NavItem onClick={toggle} className={className}>
-      <Link href={to} passHref>
-        <a className="nav-link gap-3">
-          <span className="sidebarIcon">{icon}</span>
-          <div className="d-flex flex-grow-1 align-items-center gap-2">
-            <span>{title}</span>
-            {suffix ? (
-              <span className={`badge ms-auto ${suffixColor}`}>{suffix}</span>
-            ) : (
-              ""
-            )}
-          </div>
-        </a>
+      <Link href={to} passHref className="nav-link gap-3">
+        <span className="sidebarIcon">{icon}</span>
+        <div className="d-flex flex-grow-1 align-items-center gap-2">
+          <span>{title}</span>
+          {suffix ? (
+            <span className={`badge ms-auto ${suffixColor}`}>{suffix}</span>
+          ) : (
+            ""
+          )}
+        </div>
       </Link>
-    </NavItem>
+    </NavItem >
   );
 };
 NavSingleItem.propTypes = {

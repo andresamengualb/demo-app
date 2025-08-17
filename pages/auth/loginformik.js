@@ -72,9 +72,8 @@ const LoginFormik = () => {
                         <Field
                           name="email"
                           type="text"
-                          className={`form-control${
-                            errors.email && touched.email ? " is-invalid" : ""
-                          }`}
+                          className={`form-control${errors.email && touched.email ? " is-invalid" : ""
+                            }`}
                         />
                         <ErrorMessage
                           name="email"
@@ -87,11 +86,10 @@ const LoginFormik = () => {
                         <Field
                           name="password"
                           type="password"
-                          className={`form-control${
-                            errors.password && touched.password
+                          className={`form-control${errors.password && touched.password
                               ? " is-invalid"
                               : ""
-                          }`}
+                            }`}
                         />
                         <ErrorMessage
                           name="password"
@@ -104,10 +102,8 @@ const LoginFormik = () => {
                           <Input type="checkbox" />
                           Remember me
                         </Label>
-                        <Link href="/auth/recoverpwd">
-                          <a className="ms-auto text-decoration-none">
-                            <small>¿Olvidó su contraseña?</small>
-                          </a>
+                        <Link href="/auth/recoverpwd" className="ms-auto text-decoration-none">
+                          <small>¿Olvidó su contraseña?</small>
                         </Link>
                       </FormGroup>
                       <FormGroup>

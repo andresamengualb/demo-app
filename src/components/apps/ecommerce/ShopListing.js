@@ -10,13 +10,11 @@ const ShopListing = () => {
         {ShopeItems.map((product) => (
           <Col lg="4" key={product.id} className="mb-4">
             <Link href="/apps/ecom/shopDetail">
-              <a>
-                <Image
-                  src={product.photo}
-                  alt="product"
-                  className="img-fluid rounded-3"
-                />
-              </a>
+              <Image
+                src={product.photo}
+                alt="product"
+                className="img-fluid rounded-3"
+              />
             </Link>
             <div className="pt-2">
               <small>{product.category}</small>

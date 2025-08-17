@@ -13,16 +13,14 @@ const NavItemContainer = ({
 }) => {
   return (
     <NavItem onClick={toggle} className={className}>
-      <Link href={to}>
-        <a className="gap-3 nav-link">
-          <span className="sidebarIcon">{icon}</span>
-          <span className="hide-mini w-100">
-            <div className="d-flex align-items-center">
-              <span>{title}</span>
-              <span className={`badge ms-auto ${suffixColor}`}>{suffix}</span>
-            </div>
-          </span>
-        </a>
+      <Link href={to} className="gap-3 nav-link">
+        <span className="sidebarIcon">{icon}</span>
+        <span className="hide-mini w-100">
+          <div className="d-flex align-items-center">
+            <span>{title}</span>
+            <span className={`badge ms-auto ${suffixColor}`}>{suffix}</span>
+          </div>
+        </span>
       </Link>
     </NavItem>
   );

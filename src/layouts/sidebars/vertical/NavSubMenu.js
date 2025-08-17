@@ -28,9 +28,8 @@ const NavSubMenu = ({ icon, title, items, isUrl, suffixColor, suffix }) => {
             <span className="ms-auto">
               <span className={`badge me-2 ${suffixColor}`}>{suffix}</span>
               <i
-                className={`bi fs-8 ${
-                  collapsed ? "bi-chevron-down" : "bi-chevron-right"
-                }`}
+                className={`bi fs-8 ${collapsed ? "bi-chevron-down" : "bi-chevron-right"
+                  }`}
               />
             </span>
           </div>
@@ -41,17 +40,14 @@ const NavSubMenu = ({ icon, title, items, isUrl, suffixColor, suffix }) => {
         {items.map((item) => (
           <NavItem
             key={item.title}
-            className={`hide-mini ${
-              location.pathname === item.href ? "activeLink" : ""
-            }`}
+            className={`hide-mini ${location.pathname === item.href ? "activeLink" : ""
+              }`}
           >
-            <Link href={item.href}>
-              <a className="gap-3 nav-link">
-                <span className="sidebarIcon">{item.icon}</span>
-                <span className="hide-mini">
-                  <span>{item.title}</span>
-                </span>
-              </a>
+            <Link href={item.href} className="gap-3 nav-link">
+              <span className="sidebarIcon">{item.icon}</span>
+              <span className="hide-mini">
+                <span>{item.title}</span>
+              </span>
             </Link>
           </NavItem>
         ))}
