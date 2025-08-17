@@ -3,50 +3,11 @@ import * as Icon from "react-feather";
 const SidebarData = [
   { caption: "Home" },
   {
-    title: "Dashboards",
-    href: "/dashboards",
+    title: "Inicio",
+    href: "/dashboards/classic",
     id: 1,
-    suffix: "5",
-    suffixColor: "bg-primary",
     icon: <Icon.Home />,
-    collapisble: true,
-    children: [
-      {
-        title: "Classic",
-        href: "/dashboards/classic",
-        icon: <Icon.Disc />,
-        id: 1.1,
-        collapisble: false,
-      },
-      {
-        title: "Crypto",
-        href: "/dashboards/crypto",
-        icon: <Icon.Disc />,
-        id: 1.2,
-        collapisble: false,
-      },
-      {
-        title: "Ecommerce",
-        href: "/dashboards/ecommerce",
-        icon: <Icon.Disc />,
-        id: 1.3,
-        collapisble: false,
-      },
-      {
-        title: "General",
-        href: "/dashboards/general",
-        icon: <Icon.Disc />,
-        id: 1.4,
-        collapisble: false,
-      },
-      {
-        title: "Extra",
-        href: "/dashboards/extra",
-        icon: <Icon.Disc />,
-        id: 1.5,
-        collapisble: false,
-      },
-    ],
+    collapisble: false,
   },
   { caption: "Apps" },
   {
