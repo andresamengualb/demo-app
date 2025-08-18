@@ -41,6 +41,7 @@
     "react-validation": "^3.0.7",
     "reactstrap": "^9.0.1",
     "sass": "^1.45.1",
+    "sharp": "^0.34.3",
     "simplebar-react": "^2.3.6",
     "yup": "^0.32.11"
   },
