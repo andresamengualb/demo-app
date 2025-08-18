@@ -1,6 +1,27 @@
 import * as Icon from "react-feather";
 
 const SidebarData = [
+  {
+    title: "Inicio",
+    href: "/",
+    icon: <Icon.Home />,
+    id: 0,
+    collapisble: false,
+  },
+  {
+    title: "Operaciones",
+    href: "/operaciones",
+    icon: <Icon.Activity />,
+    id: 0.1,
+    collapisble: false,
+  },
+  {
+    title: "Soporte",
+    href: "/soporte",
+    icon: <Icon.HelpCircle />,
+    id: 0.2,
+    collapisble: false,
+  },
   { caption: "Home" },
   {
     title: "Dashboards",

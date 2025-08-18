@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Container } from "reactstrap";
+import { useRouter } from 'next/router';
 import Header from "./header/Header";
-import Customizer from "./customizer/Customizer";
 import Sidebar from "./sidebars/vertical/Sidebar";
 import HorizontalHeader from "./header/HorizontalHeader";
 import HorizontalSidebar from "./sidebars/horizontal/HorizontalSidebar";
@@ -24,6 +24,9 @@ const FullLayout = ({ children }) => {
     (state) => state.customizer.isSidebarFixed
   );
   const direction = useSelector((state) => state.customizer.isRTL);
+  const { pathname } = useRouter();
+  const wideRoutes = ['/', '/operaciones', '/soporte'];
+  const isFluid = wideRoutes.includes(pathname);
   return (
     <main>
       <div
@@ -54,7 +57,7 @@ const FullLayout = ({ children }) => {
             {LayoutHorizontal ? <HorizontalHeader /> : <Header />}
             {LayoutHorizontal ? <HorizontalSidebar /> : ""}
             {/********Middle Content**********/}
-            <Container className="p-4">
+            <Container fluid={isFluid} className="p-4">
               <div
                 className={
                   isFixedSidebar && LayoutHorizontal ? "HsidebarFixed" : ""
@@ -62,14 +65,6 @@ const FullLayout = ({ children }) => {
               >
                 {children}
               </div>
-              <Customizer
-                className={customizerToggle ? "showCustomizer" : ""}
-              />
-              {showMobileSidebar || customizerToggle ? (
-                <div className="sidebarOverlay" />
-              ) : (
-                ""
-              )}
             </Container>
           </div>
         </div>
