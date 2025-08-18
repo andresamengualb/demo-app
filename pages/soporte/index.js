@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card, CardBody, Row, Col, FormGroup, Label, Input, Table } from 'reactstrap';
+import { Card, CardBody, Row, Col, FormGroup, Label, Input, Table, Button, Offcanvas, OffcanvasHeader, OffcanvasBody } from 'reactstrap';
 
 const Soporte = () => {
   const [filter, setFilter] = useState({ fechaDesde: '', fechaHasta: '', id: '', estado: '' });
@@ -16,11 +16,60 @@ const Soporte = () => {
       (!filter.estado || t.estado === filter.estado)
   );
 
+  // Compute ticket counts
+  const totalTickets = tickets.length;
+  const openCount = tickets.filter((t) => t.estado === 'Abierto').length;
+  const resolvedCount = tickets.filter((t) => t.estado === 'Resuelto').length;
+  const closedCount = tickets.filter((t) => t.estado === 'Cerrado').length;
+  const [showNew, setShowNew] = useState(false);
+  const [showDetail, setShowDetail] = useState(false);
+  const [detailTicket, setDetailTicket] = useState(null);
+  const toggleNew = () => setShowNew(!showNew);
+  const toggleDetail = () => setShowDetail(!showDetail);
   return (
     <div className="d-flex justify-content-center">
-      <div style={{ width: '80%' }}>
+      <div style={{ width: '80%', position: 'relative' }}>
+        {/* Summary cards */}
+        <Row className="mb-3">
+          <Col md="4">
+            <Card
+              className="text-center cursor-pointer border-warning"
+              style={{ backgroundColor: '#fff3cd', color: '#856404' }}
+              onClick={() => setFilter({ ...filter, estado: 'Abierto' })}
+            >
+              <CardBody>
+                <h5>Abiertos</h5>
+                <h2>{openCount}</h2>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col md="4">
+            <Card
+              className="text-center cursor-pointer border-success"
+              style={{ backgroundColor: '#d4edda', color: '#155724' }}
+              onClick={() => setFilter({ ...filter, estado: 'Resuelto' })}
+            >
+              <CardBody>
+                <h5>Resueltos</h5>
+                <h2>{resolvedCount}</h2>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col md="4">
+            <Card
+              className="text-center cursor-pointer border-danger"
+              style={{ backgroundColor: '#f8d7da', color: '#721c24' }}
+              onClick={() => setFilter({ ...filter, estado: 'Cerrado' })}
+            >
+              <CardBody>
+                <h5>Cerrados</h5>
+                <h2>{closedCount}</h2>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
         <Card className="mb-4 border-info shadow-sm">
-          <CardBody>
+        <CardBody>
             <Row>
               <Col md="3">
                 <FormGroup>
@@ -89,7 +138,7 @@ const Soporte = () => {
               </thead>
               <tbody>
                 {filtered.map((t) => (
-                  <tr key={t.id}>
+                  <tr key={t.id} className="cursor-pointer" onClick={() => { setDetailTicket(t); setShowDetail(true); }}>
                     <td>{t.id}</td>
                     <td>{t.fecha}</td>
                     <td>{t.usuario}</td>
@@ -114,6 +163,45 @@ const Soporte = () => {
             </Table>
           </CardBody>
         </Card>
+        {/* Create ticket button */}
+        <Button color="primary" className="position-fixed" style={{ bottom: '20px', right: '20px' }} onClick={toggleNew}>
+          Crear ticket
+        </Button>
+        {/* New ticket drawer */}
+        <Offcanvas isOpen={showNew} toggle={toggleNew} direction="end">
+          <OffcanvasHeader toggle={toggleNew}>Nuevo Ticket</OffcanvasHeader>
+          <OffcanvasBody>
+            <FormGroup>
+              <Label>Asunto</Label>
+              <Input type="text" />
+            </FormGroup>
+            <FormGroup>
+              <Label>Mensaje</Label>
+              <Input type="textarea" />
+            </FormGroup>
+            <FormGroup>
+              <Label>Archivo adjunto</Label>
+              <Input type="file" />
+            </FormGroup>
+            <Button color="success">Enviar</Button>
+          </OffcanvasBody>
+        </Offcanvas>
+        {/* Ticket detail drawer */}
+        <Offcanvas isOpen={showDetail} toggle={toggleDetail} direction="end">
+          <OffcanvasHeader toggle={toggleDetail}>Historial Ticket</OffcanvasHeader>
+          <OffcanvasBody>
+            {/* TODO: render detailTicket history */}
+            <FormGroup>
+              <Label>Nuevo mensaje</Label>
+              <Input type="textarea" />
+            </FormGroup>
+            <FormGroup>
+              <Label>Archivo adjunto</Label>
+              <Input type="file" />
+            </FormGroup>
+            <Button color="primary">Agregar</Button>
+          </OffcanvasBody>
+        </Offcanvas>
       </div>
     </div>
   );

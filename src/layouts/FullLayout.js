@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { Container } from "reactstrap";
 import { useRouter } from 'next/router';
 import Header from "./header/Header";
-import Customizer from "./customizer/Customizer";
 import Sidebar from "./sidebars/vertical/Sidebar";
 import HorizontalHeader from "./header/HorizontalHeader";
 import HorizontalSidebar from "./sidebars/horizontal/HorizontalSidebar";
@@ -66,14 +65,6 @@ const FullLayout = ({ children }) => {
               >
                 {children}
               </div>
-              <Customizer
-                className={customizerToggle ? "showCustomizer" : ""}
-              />
-              {showMobileSidebar || customizerToggle ? (
-                <div className="sidebarOverlay" />
-              ) : (
-                ""
-              )}
             </Container>
           </div>
         </div>

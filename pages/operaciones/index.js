@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Card, CardBody, Row, Col, FormGroup, Label, Input, Table } from 'reactstrap';
+import { Card, CardBody, Row, Col, FormGroup, Label, Input, Table, Button, Offcanvas, OffcanvasHeader, OffcanvasBody } from 'reactstrap';
 
 const Operaciones = () => {
   const allOps = useRef([]);
@@ -23,7 +23,7 @@ const Operaciones = () => {
       }
       allOps.current = temp;
     }
-    const filtered = allOps.current.filter((op) => {
+  const filtered = allOps.current.filter((op) => {
       return (
         (!filter.desde || op.fecha >= filter.desde) &&
         (!filter.hasta || op.fecha <= filter.hasta) &&
@@ -35,6 +35,12 @@ const Operaciones = () => {
     setOps(filtered.slice(0, visibleCount));
   }, [visibleCount, filter]);
 
+  // Summary counts
+  const filteredAll = allOps.current;
+  const completedCount = filteredAll.filter((op) => op.estado === 'Completado').length;
+  const processingCount = filteredAll.filter((op) => op.estado === 'Procesando').length;
+  const failedCount = filteredAll.filter((op) => op.estado === 'Fallido').length;
+
   const onScroll = (e) => {
     const { scrollTop, clientHeight, scrollHeight } = e.target;
     if (scrollTop + clientHeight >= scrollHeight - 5 && visibleCount < allOps.current.length) {
@@ -42,9 +48,57 @@ const Operaciones = () => {
     }
   };
 
+  // Upload drawer state
+  const [showUpload, setShowUpload] = useState(false);
+  const toggleUpload = () => setShowUpload(!showUpload);
+  // Detail drawer state
+  const [showDetailOp, setShowDetailOp] = useState(false);
+  const [detailOp, setDetailOp] = useState(null);
+  const toggleDetailOp = () => setShowDetailOp(!showDetailOp);
+
   return (
-    <div className="justify-content-center">
-      <div>
+    <div className="d-flex justify-content-center">
+      <div style={{ width: '80%' }}>
+        {/* Summary cards */}
+        <Row className="mb-3">
+          <Col md="4">
+            <Card
+              className="text-center cursor-pointer border-success"
+              style={{ backgroundColor: '#d4edda', color: '#155724' }}
+              onClick={() => { setFilter({ ...filter, estado: 'Completado' }); setVisibleCount(filteredAll.length); }}
+            >
+              <CardBody>
+                <h5>Completados</h5>
+                <h2>{completedCount}</h2>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col md="4">
+            <Card
+              className="text-center cursor-pointer border-warning"
+              style={{ backgroundColor: '#fff3cd', color: '#856404' }}
+              onClick={() => { setFilter({ ...filter, estado: 'Procesando' }); setVisibleCount(filteredAll.length); }}
+            >
+              <CardBody>
+                <h5>Procesando</h5>
+                <h2>{processingCount}</h2>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col md="4">
+            <Card
+              className="text-center cursor-pointer border-danger"
+              style={{ backgroundColor: '#f8d7da', color: '#721c24' }}
+              onClick={() => { setFilter({ ...filter, estado: 'Fallido' }); setVisibleCount(filteredAll.length); }}
+            >
+              <CardBody>
+                <h5>Fallidos</h5>
+                <h2>{failedCount}</h2>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        {/* Filters */}
         <Card className="mb-4 border-primary shadow-sm">
           <CardBody>
             <Row>
@@ -112,12 +166,9 @@ const Operaciones = () => {
           </CardBody>
         </Card>
 
-        <Card
-          className="border-primary shadow mb-5"
-          style={{ maxHeight: '400px', overflow: 'auto' }}
-          onScroll={onScroll}
-        >
-          <CardBody>
+        <Card className="border-primary shadow mb-5">
+          <CardBody style={{ paddingBottom: '1rem' }}>
+            <div style={{ maxHeight: '400px', overflow: 'auto' }} onScroll={onScroll}>
             <Table striped bordered hover>
               <thead>
                 <tr>
@@ -125,21 +176,22 @@ const Operaciones = () => {
                   <th><strong>Usuario</strong></th>
                   <th><strong>Estado</strong></th>
                   <th><strong>Documento</strong></th>
+                  <th><strong>Acciones</strong></th>
                 </tr>
               </thead>
               <tbody>
                 {ops.map((op) => (
-                  <tr key={op.id}>
+                  <tr key={op.id} className="cursor-pointer" onClick={() => { setDetailOp(op); setShowDetailOp(true); }}>
                     <td>{op.id}</td>
                     <td>{op.usuario}</td>
                     <td>
                       <span style={{
                         backgroundColor:
                           op.estado === 'Completado' ? '#d4edda' :
-                            op.estado === 'Procesando' ? '#fff3cd' : '#f8d7da',
+                          op.estado === 'Procesando' ? '#fff3cd' : '#f8d7da',
                         color:
                           op.estado === 'Completado' ? '#155724' :
-                            op.estado === 'Procesando' ? '#856404' : '#721c24',
+                          op.estado === 'Procesando' ? '#856404' : '#721c24',
                         padding: '0.25em 0.5em',
                         borderRadius: '0.25rem',
                       }}>
@@ -147,12 +199,47 @@ const Operaciones = () => {
                       </span>
                     </td>
                     <td>{op.nombreDocumento}</td>
+                    <td>
+                      <Button color="link" onClick={(e) => { e.stopPropagation(); /* implement download */ }}>
+                        <i className="bi bi-download"></i>
+                      </Button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </Table>
+            </div>
           </CardBody>
         </Card>
+        {/* Upload button */}
+        <Button color="primary" className="position-fixed" style={{ bottom: '20px', right: '20px' }} onClick={toggleUpload}>
+          Subir documento
+        </Button>
+        <Offcanvas isOpen={showUpload} toggle={toggleUpload} direction="end">
+          <OffcanvasHeader toggle={toggleUpload}>Subir Documento</OffcanvasHeader>
+          <OffcanvasBody>
+            <FormGroup>
+              <Label>Archivo</Label>
+              <Input type="file" />
+            </FormGroup>
+            <Button color="success">Subir</Button>
+          </OffcanvasBody>
+        </Offcanvas>
+        {/* Detail drawer */}
+        <Offcanvas isOpen={showDetailOp} toggle={toggleDetailOp} direction="end">
+          <OffcanvasHeader toggle={toggleDetailOp}>Detalle Operación</OffcanvasHeader>
+          <OffcanvasBody>
+            {detailOp && (
+              <div>
+                <p><strong>ID:</strong> {detailOp.id}</p>
+                <p><strong>Usuario:</strong> {detailOp.usuario}</p>
+                <p><strong>Fecha:</strong> {detailOp.fecha}</p>
+                <p><strong>Estado:</strong> {detailOp.estado}</p>
+                {/* Aquí historial y errores */}
+              </div>
+            )}
+          </OffcanvasBody>
+        </Offcanvas>
       </div>
     </div>
   );
