@@ -186,33 +186,42 @@ const Soporte = () => {
           <OffcanvasBody>
             <FormGroup>
               <Label>Asunto</Label>
-              <Input type="text" />
+              <Input type="text" id="new-asunto" />
             </FormGroup>
             <FormGroup>
               <Label>Mensaje</Label>
-              <Input type="textarea" />
+              <Input type="textarea" id="new-mensaje" style={{ minHeight: '120px' }} />
             </FormGroup>
             <FormGroup>
-              <Label>Archivo adjunto</Label>
-              <Input type="file" />
+              <Label>Archivo adjunto <small>(opcional)</small></Label>
+              <Input type="file" id="new-archivo" />
             </FormGroup>
-            <Button color="success">Enviar</Button>
+            <div className="text-center">
+              <Button color="primary" id="new-enviar">Enviar</Button>
+            </div>
           </OffcanvasBody>
         </Offcanvas>
         {/* Ticket detail drawer */}
         <Offcanvas isOpen={showDetail} toggle={toggleDetail} direction="end">
           <OffcanvasHeader toggle={toggleDetail}>Historial Ticket</OffcanvasHeader>
           <OffcanvasBody>
-            {/* TODO: render detailTicket history */}
+            {/* Historial de mensajes */}
+            <div style={{ maxHeight: '200px', overflow: 'auto', marginBottom: '1rem' }}>
+              <p><strong>01/01/2022 10:00</strong> Primer mensaje de ejemplo.</p>
+              <p><strong>02/01/2022 12:30</strong> Segundo mensaje de ejemplo.</p>
+              <p><strong>03/01/2022 14:45</strong> Tercer mensaje de ejemplo.</p>
+            </div>
             <FormGroup>
               <Label>Nuevo mensaje</Label>
-              <Input type="textarea" />
+              <Input type="textarea" style={{ minHeight: '100px' }} />
             </FormGroup>
             <FormGroup>
-              <Label>Archivo adjunto</Label>
+              <Label>Archivo adjunto <small>(opcional)</small></Label>
               <Input type="file" />
             </FormGroup>
-            <Button color="primary">Agregar</Button>
+            <div className="text-center">
+              <Button color="primary">Agregar</Button>
+            </div>
           </OffcanvasBody>
         </Offcanvas>
       </div>
