@@ -9,7 +9,9 @@ import Chat from "../src/components/dashboards/classic/Chat";
 
 const Classic = () => {
   return (
-    <>
+    <div className="d-flex justify-content-center">
+      <div style={{ width: '80%' }}>
+        <>
       {/*********************Sales Overview ************************/}
       <Row>
         <Col lg="12">
@@ -42,7 +44,9 @@ const Classic = () => {
           <Chat />
         </Col>
       </Row>
-    </>
+        </>
+      </div>
+    </div>
   );
 };
 
