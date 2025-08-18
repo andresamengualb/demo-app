@@ -164,8 +164,8 @@ const seriesbounce = [
 const Stats = () => {
   return (
     <Row>
-      <Col lg="10">
-        <Card className="bg-white">
+      <Col lg="4">
+        <Card className="bg-primary text-dark-white">
           <CardBody>
             <CardTitle>Revenue Statistics</CardTitle>
             <div className="d-flex align-items-center mt-4 pt-2">
@@ -189,8 +189,8 @@ const Stats = () => {
           </CardBody>
         </Card>
       </Col>
-      <Col lg="10">
-        <Card className="bg-white">
+      <Col lg="4">
+        <Card className="bg-info">
           <CardBody>
             <div className="d-flex align-items-center">
               <div>
@@ -211,7 +211,7 @@ const Stats = () => {
           </div>
         </Card>
       </Col>
-      <Col lg="10">
+      <Col lg="4">
         <Card>
           <CardBody>
             <h2 className="mb-0">56.33%</h2>

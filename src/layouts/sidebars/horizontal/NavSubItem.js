@@ -43,17 +43,18 @@ const NavSubItem = ({
             key={item.title}
             className={`${location.pathname === item.href ? "activeLink" : ""}`}
           >
-            <Link href={item.href} className="nav-link gap-3">
-              <span className="sidebarIcon">{item.icon}</span>
-              <span className="">
-                <span>{item.title}</span>
-              </span>
+            <Link href={item.href}>
+              <a className="nav-link gap-3">
+                <span className="sidebarIcon">{item.icon}</span>
+                <span className="">
+                  <span>{item.title}</span>
+                </span>
+              </a>
             </Link>
           </NavItem>
-        ))
-        }
-      </Nav >
-    </NavItem >
+        ))}
+      </Nav>
+    </NavItem>
   );
 };
 

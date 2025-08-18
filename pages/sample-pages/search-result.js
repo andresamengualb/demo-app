@@ -71,12 +71,14 @@ const SearchResult = () => {
                 key={list.id}
               >
                 <h4 className="mb-0">
-                  <Link href="/" className="text-decoration-none font-medium p-0">
-                    {list.category}
+                  <Link href="/">
+                    <a className="text-decoration-none font-medium p-0">
+                      {list.category}
+                    </a>
                   </Link>
                 </h4>
-                <Link href="/" className="search-links p-0 text-success">
-                  {list.site}
+                <Link href="/">
+                  <a className="search-links p-0 text-success">{list.site}</a>
                 </Link>
                 <p className="mb-0">{list.desc}</p>
               </ListGroupItem>

@@ -28,10 +28,10 @@ const LoginFormik = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email("El correo electrónico no es válido").required("El correo electrónico es obligatorio"),
+    email: Yup.string().email("Email is invalid").required("Email is required"),
     password: Yup.string()
-      .min(6, "La contraseña debe tener al menos 6 caracteres")
-      .required("La contraseña es obligatoria"),
+      .min(6, "Password must be at least 6 characters")
+      .required("Password is required"),
   });
 
   return (
@@ -46,24 +46,22 @@ const LoginFormik = () => {
         <Row className="justify-content-center align-items-center h-100">
           <Col lg="12" className="loginContainer">
             <AuthLogo />
-            <Card className="bg-white">
+            <Card>
               <CardBody className="p-4 m-1">
-                <h4 className="mb-0 fw-bold">Iniciar sesión</h4>
+                <h4 className="mb-0 fw-bold">Login</h4>
+                <small className="pb-4 d-block">
+                  Do not have an account?{" "}
+                  <Link href="/auth/registerformik">Sign Up</Link>
+                </small>
                 <Formik
                   initialValues={initialValues}
                   validationSchema={validationSchema}
-                  onSubmit={(fields, { setFieldError }) => {
-                    if (
-                      fields.email === "admin@simplifai.cl" &&
-                      fields.password === "admin1"
-                    ) {
-                      navigate.push("/dashboards/classic");
-                    } else {
-                      setFieldError(
-                        "password",
-                        "Usuario o contraseña incorrectos"
-                      );
-                    }
+                  onSubmit={(fields) => {
+                    // eslint-disable-next-line no-alert
+                    alert(
+                      `SUCCESS!! :-)\n\n${JSON.stringify(fields, null, 4)}`
+                    );
+                    navigate.push("/");
                   }}
                   render={({ errors, touched }) => (
                     <Form>
@@ -72,8 +70,9 @@ const LoginFormik = () => {
                         <Field
                           name="email"
                           type="text"
-                          className={`form-control${errors.email && touched.email ? " is-invalid" : ""
-                            }`}
+                          className={`form-control${
+                            errors.email && touched.email ? " is-invalid" : ""
+                          }`}
                         />
                         <ErrorMessage
                           name="email"
@@ -86,10 +85,11 @@ const LoginFormik = () => {
                         <Field
                           name="password"
                           type="password"
-                          className={`form-control${errors.password && touched.password
+                          className={`form-control${
+                            errors.password && touched.password
                               ? " is-invalid"
                               : ""
-                            }`}
+                          }`}
                         />
                         <ErrorMessage
                           name="password"
@@ -102,13 +102,15 @@ const LoginFormik = () => {
                           <Input type="checkbox" />
                           Remember me
                         </Label>
-                        <Link href="/auth/recoverpwd" className="ms-auto text-decoration-none">
-                          <small>¿Olvidó su contraseña?</small>
+                        <Link href="/auth/forgotPwd">
+                          <a className="ms-auto text-decoration-none">
+                            <small>Forgot Pwd?</small>
+                          </a>
                         </Link>
                       </FormGroup>
                       <FormGroup>
                         <Button type="submit" color="primary" className="me-2">
-                          Iniciar sesión
+                          Login
                         </Button>
                       </FormGroup>
                     </Form>

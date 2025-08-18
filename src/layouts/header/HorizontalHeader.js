@@ -13,10 +13,12 @@ import {
   Input,
 } from "reactstrap";
 
-import { Bell } from "react-feather";
+import { Bell, MessageSquare, Grid } from "react-feather";
 import { useSelector, useDispatch } from "react-redux";
 import SimpleBar from "simplebar-react";
+import MessageDD from "./MessageDD";
 import NotificationDD from "./NotificationDD";
+import MegaDD from "./MegaDD";
 import user1 from "../../assets/images/users/user1.jpg";
 import Image from "next/image";
 import { ToggleMobileSidebar } from "../../../store/customizer/CustomizerSlice";
@@ -56,6 +58,17 @@ const HorizontalHeader = () => {
           </Link>
         </NavItem> */}
 
+          <UncontrolledDropdown inNavbar nav>
+            <DropdownToggle caret nav>
+              Create
+            </DropdownToggle>
+            <DropdownMenu end>
+              <DropdownItem>Option 1</DropdownItem>
+              <DropdownItem>Option 2</DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem>Reset</DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
         </Nav>
         <Nav className="ms-auto flex-row align-items-center" navbar>
           <Button
@@ -87,6 +100,40 @@ const HorizontalHeader = () => {
                   Check All
                 </Button>
               </div>
+            </DropdownMenu>
+          </UncontrolledDropdown>
+          {/******************************/}
+          {/**********Message DD**********/}
+          {/******************************/}
+          <UncontrolledDropdown className="mx-1">
+            <DropdownToggle className=" hov-dd border-0" color={topbarColor}>
+              <MessageSquare size={18} />
+            </DropdownToggle>
+            <DropdownMenu className="ddWidth" start>
+              <DropdownItem header>
+                <span className="mb-0 fs-5">Messages</span>
+              </DropdownItem>
+              <DropdownItem divider />
+              <SimpleBar style={{ maxHeight: "350px" }}>
+                <MessageDD />
+              </SimpleBar>
+              <DropdownItem divider />
+              <div className="p-2 px-3">
+                <Button color="primary" size="sm" block>
+                  Check All
+                </Button>
+              </div>
+            </DropdownMenu>
+          </UncontrolledDropdown>
+          {/******************************/}
+          {/**********Mega DD**********/}
+          {/******************************/}
+          <UncontrolledDropdown className="mega-dropdown mx-1">
+            <DropdownToggle className=" hov-dd border-0" color={topbarColor}>
+              <Grid size={18} />
+            </DropdownToggle>
+            <DropdownMenu>
+              <MegaDD />
             </DropdownMenu>
           </UncontrolledDropdown>
           <UncontrolledDropdown className=" hov-dd">

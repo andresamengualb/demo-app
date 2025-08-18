@@ -86,8 +86,10 @@ const TicketListing = () => {
               <td>{ticket.Id}</td>
               <td>
                 <h5 className="mb-0 mt-2">
-                  <Link href="/apps/ticket/ticketdetail" className="text-dark text-decoration-none">
-                    {ticket.ticketTitle}
+                  <Link href="/apps/ticket/ticketdetail">
+                    <a className="text-dark text-decoration-none">
+                      {ticket.ticketTitle}
+                    </a>
                   </Link>
                 </h5>
                 <small

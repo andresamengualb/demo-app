@@ -225,15 +225,19 @@ const TicketDetail = () => {
             <CardBody>
               <Row>
                 <Col xs="6" className="text-center border-end">
-                  <Link href="/" className="text-dark d-flex align-items-center justify-content-center text-decoration-none fw-bold">
-                    <i className="bi bi-chat-left-fill me-2"></i>
-                    Message
+                  <Link href="/">
+                    <a className="text-dark d-flex align-items-center justify-content-center text-decoration-none fw-bold">
+                      <i className="bi bi-chat-left-fill me-2"></i>
+                      Message
+                    </a>
                   </Link>
                 </Col>
                 <Col xs="6" className="text-center">
-                  <Link href="/" className="text-dark d-flex align-items-center justify-content-center text-decoration-none fw-bold">
-                    <i className="bi bi-columns me-2"></i>
-                    Portfolio
+                  <Link href="/">
+                    <a className="text-dark d-flex align-items-center justify-content-center text-decoration-none fw-bold">
+                      <i className="bi bi-columns me-2"></i>
+                      Portfolio
+                    </a>
                   </Link>
                 </Col>
               </Row>

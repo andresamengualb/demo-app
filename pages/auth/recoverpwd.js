@@ -25,7 +25,7 @@ const RecoverPassword = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email("El correo electrónico no es válido").required("El correo electrónico es obligatorio"),
+    email: Yup.string().email("Email is invalid").required("Email is required"),
   });
 
   return (
@@ -48,7 +48,7 @@ const RecoverPassword = () => {
                   onSubmit={(fields) => {
                     // eslint-disable-next-line no-alert
                     alert(
-                      `Revise su bandeja de entrada, le hemos enviado una nueva contraseña.\n\n${JSON.stringify(
+                      `Check your inbox we sent a new pwd!! :-)\n\n${JSON.stringify(
                         fields,
                         null,
                         4
@@ -59,11 +59,11 @@ const RecoverPassword = () => {
                   render={({ errors, touched }) => (
                     <Form className="mt-3">
                       <FormGroup>
-                        <Label htmlFor="email">Correo electrónico</Label>
+                        <Label htmlFor="email">Email</Label>
                         <Field
                           name="email"
                           type="text"
-                          placeholder="Ingrese correo electrónico para recuperar contraseña"
+                          placeholder="enter email to get new pwd"
                           className={`form-control${
                             errors.email && touched.email ? " is-invalid" : ""
                           }`}
@@ -81,7 +81,7 @@ const RecoverPassword = () => {
                           block
                           className="me-2"
                         >
-                          Recuperar contraseña
+                          Recover Password
                         </Button>
                       </FormGroup>
                     </Form>
