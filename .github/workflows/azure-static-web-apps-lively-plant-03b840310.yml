@@ -5,10 +5,9 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-    types: [closed]  # solo necesitamos 'closed' para evaluar si fue merge
+    types: [closed]
 
 jobs:
-  # Cerrar preview cuando se cierra el PR (mergeado o no)
   close_preview:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
@@ -18,7 +17,6 @@ jobs:
         with:
           action: "close"
 
-  # Deploy a producción SOLO en push a main o PR mergeado a main
   prod_deploy:
     # push a main  OR  (PR closed AND merged AND base=main)
     if: github.event_name == 'push'
@@ -35,18 +33,15 @@ jobs:
         with:
           submodules: true
           lfs: false
-
-      # (Opcional) si lo necesitas para tu build
-      - name: Install OIDC Client from Core Package
-        run: npm install @actions/core@1.6.0 @actions/http-client
-
+          
       - name: Get Id Token
         uses: actions/github-script@v6
         id: idtoken
         with:
           script: |
-            const core = require('@actions/core');
-            return await core.getIDToken();
+            // 'core' YA existe en el contexto de github-script
+            const id = await core.getIDToken();
+            return id;
           result-encoding: string
 
       - name: Build & Deploy (SWA)
@@ -59,7 +54,6 @@ jobs:
           output_location: ""
           github_id_token: ${{ steps.idtoken.outputs.result }}
 
-# (Opcional) evita carreras/dobles despliegues si coinciden eventos
 concurrency:
   group: prod-deploy
   cancel-in-progress: true
