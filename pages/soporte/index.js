@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Card, CardBody, Row, Col, FormGroup, Label, Input, Table, Button, Offcanvas, OffcanvasHeader, OffcanvasBody } from 'reactstrap';
+import { List, Unlock, CheckCircle, XCircle } from 'react-feather';
 
 const Soporte = () => {
   const [filter, setFilter] = useState({ fechaDesde: '', fechaHasta: '', id: '', estado: '' });
@@ -31,37 +32,49 @@ const Soporte = () => {
       <div style={{ width: '80%', position: 'relative' }}>
         {/* Summary cards */}
         <Row className="mb-3">
-          <Col md="4">
+          <Col md="3">
+            <Card className="text-center cursor-pointer border-info" onClick={() => setFilter({ ...filter, estado: '' })}>
+              <CardBody style={{ backgroundColor: '#e2e3e5', color: '#383d41' }}>
+                <List size={24} />
+                <h5>Todos</h5>
+                <h2>{totalTickets}</h2>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col md="3">
             <Card
               className="text-center cursor-pointer border-warning"
               style={{ backgroundColor: '#fff3cd', color: '#856404' }}
               onClick={() => setFilter({ ...filter, estado: 'Abierto' })}
             >
               <CardBody>
+                <Unlock size={24} />
                 <h5>Abiertos</h5>
                 <h2>{openCount}</h2>
               </CardBody>
             </Card>
           </Col>
-          <Col md="4">
+          <Col md="3">
             <Card
               className="text-center cursor-pointer border-success"
               style={{ backgroundColor: '#d4edda', color: '#155724' }}
               onClick={() => setFilter({ ...filter, estado: 'Resuelto' })}
             >
               <CardBody>
+                <CheckCircle size={24} />
                 <h5>Resueltos</h5>
                 <h2>{resolvedCount}</h2>
               </CardBody>
             </Card>
           </Col>
-          <Col md="4">
+          <Col md="3">
             <Card
               className="text-center cursor-pointer border-danger"
               style={{ backgroundColor: '#f8d7da', color: '#721c24' }}
               onClick={() => setFilter({ ...filter, estado: 'Cerrado' })}
             >
               <CardBody>
+                <XCircle size={24} />
                 <h5>Cerrados</h5>
                 <h2>{closedCount}</h2>
               </CardBody>

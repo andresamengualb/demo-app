@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardBody, Row, Col, FormGroup, Label, Input, Table, Button, Offcanvas, OffcanvasHeader, OffcanvasBody } from 'reactstrap';
+import { List, CheckCircle, RefreshCw, AlertCircle } from 'react-feather';
 
 const Operaciones = () => {
   const allOps = useRef([]);
@@ -37,6 +38,7 @@ const Operaciones = () => {
 
   // Summary counts
   const filteredAll = allOps.current;
+  const totalCount = filteredAll.length;
   const completedCount = filteredAll.filter((op) => op.estado === 'Completado').length;
   const processingCount = filteredAll.filter((op) => op.estado === 'Procesando').length;
   const failedCount = filteredAll.filter((op) => op.estado === 'Fallido').length;
@@ -61,37 +63,37 @@ const Operaciones = () => {
       <div style={{ width: '80%' }}>
         {/* Summary cards */}
         <Row className="mb-3">
-          <Col md="4">
-            <Card
-              className="text-center cursor-pointer border-success"
-              style={{ backgroundColor: '#d4edda', color: '#155724' }}
-              onClick={() => { setFilter({ ...filter, estado: 'Completado' }); setVisibleCount(filteredAll.length); }}
-            >
+          <Col md="3">
+            <Card className="text-center cursor-pointer border-info" style={{ backgroundColor: '#e2e3e5', color: '#383d41' }} onClick={() => { setFilter({ ...filter, estado: '' }); setVisibleCount(totalCount); }}>
               <CardBody>
+                <List size={24} />
+                <h5>Todos</h5>
+                <h2>{totalCount}</h2>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col md="3">
+            <Card className="text-center cursor-pointer border-success" style={{ backgroundColor: '#d4edda', color: '#155724' }} onClick={() => { setFilter({ ...filter, estado: 'Completado' }); setVisibleCount(totalCount); }}>
+              <CardBody>
+                <CheckCircle size={24} />
                 <h5>Completados</h5>
                 <h2>{completedCount}</h2>
               </CardBody>
             </Card>
           </Col>
-          <Col md="4">
-            <Card
-              className="text-center cursor-pointer border-warning"
-              style={{ backgroundColor: '#fff3cd', color: '#856404' }}
-              onClick={() => { setFilter({ ...filter, estado: 'Procesando' }); setVisibleCount(filteredAll.length); }}
-            >
+          <Col md="3">
+            <Card className="text-center cursor-pointer border-warning" style={{ backgroundColor: '#fff3cd', color: '#856404' }} onClick={() => { setFilter({ ...filter, estado: 'Procesando' }); setVisibleCount(totalCount); }}>
               <CardBody>
+                <RefreshCw size={24} />
                 <h5>Procesando</h5>
                 <h2>{processingCount}</h2>
               </CardBody>
             </Card>
           </Col>
-          <Col md="4">
-            <Card
-              className="text-center cursor-pointer border-danger"
-              style={{ backgroundColor: '#f8d7da', color: '#721c24' }}
-              onClick={() => { setFilter({ ...filter, estado: 'Fallido' }); setVisibleCount(filteredAll.length); }}
-            >
+          <Col md="3">
+            <Card className="text-center cursor-pointer border-danger" style={{ backgroundColor: '#f8d7da', color: '#721c24' }} onClick={() => { setFilter({ ...filter, estado: 'Fallido' }); setVisibleCount(totalCount); }}>
               <CardBody>
+                <AlertCircle size={24} />
                 <h5>Fallidos</h5>
                 <h2>{failedCount}</h2>
               </CardBody>
